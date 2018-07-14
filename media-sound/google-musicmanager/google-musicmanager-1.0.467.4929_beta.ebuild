@@ -23,6 +23,7 @@ RDEPEND="
 	dev-qt/qtgui:5
 	dev-qt/qtwebkit:5
 	media-libs/flac
+	media-libs/libid3tag
 	media-libs/libvorbis
 	net-dns/libidn:1.33
 	sys-libs/glibc
@@ -45,8 +46,9 @@ src_install() {
 	exeinto "/${INSTALL_BASE}"
 	chrpath -d MusicManager || die
 	doexe MusicManager google-musicmanager minidump_upload
-	#TODO unbundle this
-	doexe libaacdec.so libaudioenc.so.0 libmpgdec.so.0 libid3tag.so libQtSingleApplication*.so* xdg-*
+	# These libraries are not compatible with gentoo.
+        #       libfaad.so   libmp3lame.so    libmpg123.so.0 libQt5Solutions_SingleApplication-2.6.so
+	doexe	libaacdec.so libaudioenc.so.0 libmpgdec.so.0 libQtSingleApplication.* xdg-*
 
 	dosym /"${INSTALL_BASE}"/google-musicmanager /opt/bin/google-musicmanager
 
